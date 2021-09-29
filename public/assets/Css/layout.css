@@ -1,0 +1,76 @@
+body {
+    max-width: 1920px;
+    min-width: 600px;
+}
+
+.d-bd,
+nav,
+.dropdown-toggle,
+.btn-signout {
+    background-color: #2F86B9;
+}
+
+nav,
+nav a {
+    color: white;
+}
+
+.user {
+    font-size: 42px;
+    color: white;
+    border: none;
+}
+
+.dropdown-user {
+    top: 110% !important;
+    border: 2px solid #2F86B9;
+    color: #2F86B9;
+    min-width: 250px;
+}
+
+.dcolor,
+.btn-signout:hover {
+    color: #2F86B9 !important;
+}
+
+.dropdown-more {
+    border: 2px solid #2F86B9;
+    top: 170% !important;
+}
+
+.more {
+    color: white;
+    border: 2px solid white;
+    font-size: 18px;
+    margin-left: 20px;
+}
+
+.dropdown-toggle::after {
+    display: none;
+}
+
+#listselectpage:focus,
+.inputForm:focus {
+    outline: 0 none;
+}
+
+@media (min-width: 1000px) {
+    #more {
+        display: none !important;
+    }
+}
+
+@media (max-width: 1000px) {
+    #list {
+        display: none !important;
+    }
+}
+
+@media (max-width: 700px) {
+    #logo {
+        font-size: 18px;
+    }
+    .inline-div {
+        display: inline;
+    }
+}

@@ -1,0 +1,30 @@
+<table id="tablepage" class="js-sort-table table table-hover mx-auto mt-5 mb-0" style="width: 90%; max-width: 1000px">
+    <thead>
+        <tr>
+            <th scope="col" class="text-center" width="65%">Page Name
+            </th>
+            </th>
+            <th scope="col" class="text-center" width="20%">Status
+            </th>
+            <th scope="col" class="text-center" width="15%">Edit
+            </th>
+        </tr>
+    </thead>
+    <tbody id="tablePage">
+
+    </tbody>
+    <tfoot style="display: none;" id="formNewPage">
+        <tr>
+            <td scope="row"><input type="text" class="form-control form-control-sm" id="newPageName" placeholder="Page name"></td>
+            <td>
+                <select class="custom-select custom-select-sm" id="newPageStatus">
+                    <option value="Enable" selected>Enable</option>
+                    <option value="Disable">Disable</option>
+                </select>
+            </td>
+            <td class="h5 align-middle"><i onclick="cancelAddNewPage()" class="fas fa-times text-danger"></i><i onclick="submitNewPage()" class="fas fa-check text-success ml-2"></i></td>
+        </tr>
+    </tfoot>
+</table>
+<div onclick="toAddNewPage()" class="d-bd text-white mx-auto py-2 text-center h6" id="newPage" style="width: 90%; max-width: 1000px">New page</div>
+<script src="/assets/js/tablepage.js"></script>

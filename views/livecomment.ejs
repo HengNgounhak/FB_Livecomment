@@ -1,0 +1,61 @@
+<div class="livecmt mx-5">
+    <div class="w-75 mx-auto mt-5">
+        <form id="livecommentform">
+            <p class="dcolor h6 ">Live Url</p>
+            <input id="inputliveurl" class="dcolor w-100 bd-white py-2 pl-2" type="text" placeholder="Live url ..." style="border: 2px solid #2F86B9" required>
+            <br>
+            <p class="dcolor h6 mt-3">Key Word</p>
+            <input id="inputKeyword" class="dcolor w-100 bd-white py-2 pl-2" type="text" placeholder="Key word ..." style="border: 2px solid #2F86B9; font-size: 14px">
+            <br>
+            <div class="text-center">
+                <input class="text-white w-75 text-center d-bd border-0 p-2 mt-5" type="submit" value="Get">
+            </div>
+        </form>
+
+        <button id="btnLoading" type="button" data-toggle="modal" data-target="#loadingModalCenter" class="d-none"></button>
+
+        <!-- Modal Processing Comment-->
+        <div class="modal fade rounded-0" id="loadingModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content border-0 m-auto p-3" style="width: fit-content;" id="processing">
+                    <div class="modal-body text-center dcolor">
+                        <div class="loader m-auto"></div>
+                        <br>
+                        <p class="text-center m-0">Processing Comment ...</p>
+                    </div>
+                </div>
+                <div class="modal-content border-0 m-auto py-3" id="wrongurl" style="display: none; width: 70%;">
+                    <div class="modal-body text-center" id="modelDelete">
+                        <h1 class="text-danger m-0"><i class="fas fa-exclamation-circle"></i>
+                        </h1>
+                        <p class="text-danger mb-0 mt-2">Incorrect Live Url</p>
+                    </div>
+                    <div class="modal-footer border-0 text-center">
+                        <button type="button" class="btn btn-light dcolor m-auto px-5 font-weight-bold" data-dismiss="modal">Ok</button>
+                        <!-- <button type="button" class="btn d-bd text-white px-4" id="agree" data-dismiss="modal">Yes</button> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button id="btnConfirm" type="button" data-toggle="modal" data-target="#confirmModalCenter" class="d-none"></button>
+
+        <!-- Modal Make Sure there is no keyword -->
+        <div class="modal fade rounded-0" id="confirmModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content border-0 m-auto py-3">
+                    <div class="modal-body text-center">
+                        <h1 class="text-danger m-0"><i class="fas fa-exclamation-circle"></i>
+                        </h1>
+                        <p class="text-danger mt-2">No keyword for select any comments!!!</p>
+                    </div>
+                    <div class="modal-footer d-flex pb-0 justify-content-between">
+                        <button type="button" class="btn btn-light dcolor" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn d-bd text-white px-4" id="nokeyword" data-dismiss="modal">Ok</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="/assets/js/livecomment.js"></script>

@@ -1,0 +1,27 @@
+.js-sort-table,
+.js-sort-table td,
+.js-sort-table th {
+    border: 2px solid #2F86B9 !important;
+}
+
+.js-sort-table {
+    border-collapse: collapse;
+    color: #2F86B9;
+}
+
+.js-sort-table th {
+    background-color: #2F86B9;
+    color: white;
+}
+
+#tableurl td:nth-last-child(-n+3),
+#tableuser td:nth-last-child(-n+3),
+#tablepage td:nth-last-child(-n+2),
+#tablecomment td:nth-last-child(-n+2) {
+    text-align: center;
+}
+
+.btn-group-toggle .active {
+    background-color: #2F86B9;
+    color: white !important;
+}

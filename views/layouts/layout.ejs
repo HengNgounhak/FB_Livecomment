@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retrieve Facebook Live Comment</title>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="/assets/Css/layout.css">
+    <link rel="stylesheet" href="/assets/Css/livecomment.css">
+    <link rel="stylesheet" href="/assets/Css/table.css">
+    <link rel="stylesheet" href="/assets/Icons/fontawesome-free-5.15.1-web/css/all.css">
+
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v11.0" nonce="kkjrJ6SL"></script>
+    <script type="text/javascript" src="/assets/js/layout.js"></script>
+</head>
+
+<body>
+    <div>
+        <nav class="navbar navbar-expand-sm d-flex align-items-center justify-content-between px-5 py-1">
+            <h5 id="logo">Retrieve Facebook Live Comment</h5>
+
+            <div class="d-flex flex-row align-items-center">
+
+                <button id="btnLogin" type="button" data-toggle="modal" data-target="#exampleModalCenter" class="dcolor bg-white border border-none px-4 py-1 font-weight-bold my-3" style="font-size: 14px;">Sign In</button>
+
+                <!-- Modal -->
+                <div class="modal fade rounded-0" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content" id="modelFBLogin">
+                            <div class="modal-header border-0 pb-0 pt-2">
+                                <button type="button" class="close dcolor" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            </div>
+                            <div class="modal-body text-center dcolor">
+                                <h4>Retrieve Facebook Live Comment</h4>
+                                <p>You need to login with facebook</p>
+                                <br>
+                                <div id="my_fb_button" class="fb-login-button mb-5" data-width="" data-size="large" data-button-type="continue_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="true" scope="public_profile,email" onlogin="checkLoginState();">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-content" id="modelMoreInformation" style="display: none;">
+                            <div class="modal-body dcolor m-4">
+                                <h4 class="text-center">Retrieve Facebook Live Comment</h4>
+                                <p class="text-center mb-2">You need to fill more informantion about your personal data.</p>
+                                <form id="moreInformationForm">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Telephone</label>
+                                        <input type="text" class="form-control inputForm" id="usertelephone" minlength="9" maxlength="10" aria-describedby="emailHelp" placeholder="Telephone">
+                                        <small id="emailHelp" class="form-text text-muted dcolor">We'll never share your telephone with anyone else.</small>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Address</label>
+                                        <input type="text" class="form-control inputForm" id="useraddress" placeholder="Address">
+                                    </div>
+                                    <div class="text-center pt-3">
+                                        <button type="submit" class="btn d-bd text-white w-50">Submit</button>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <ul class="navbar-nav align-items-center" id="list">
+                    <li class="nav-item">
+                        <a class="nav-link topage" href="/page">Back to Pages</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link tolivecomment" href="/livecomment">Live Comment</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link toliveurl" href="/tableurl">Live Url</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link toupgradeplan" href="/price">Upgrade Plan</a>
+                    </li>
+                </ul>
+                <div class="dropdown" id="usericon">
+                    <button class="user dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-user-circle"></i>
+                    </button>
+                    <div class="pb-0 dropdown-user dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
+                        <h5 class="m-0 text-center" id="username">Username</h5>
+                        <p class="text-center" id="email"></p>
+                        <label class="font-weight-bold m-0 pl-3">Telephone</label>
+                        <p class="pl-3 mb-1" id="mytelephone">012345678</p>
+                        <label class="font-weight-bold m-0 pl-3">Address</label>
+                        <p class="pl-3" id="myaddress">23 No, st 213 Village II Sensok Bongkork I Phnom Penh</p>
+                        <a class="btn-signout dropdown-item font-weight-bold text-center text-white p-2" onclick="logout()">Sign Out</a>
+                    </div>
+                </div>
+                <div class="dropdown" id="more">
+                    <button class="more dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-bars"></i>
+                        </button>
+                    <div class="dropdown-more dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu2">
+                        <a class="dropdown-item dcolor topage" href="/page">Back to Pages</a>
+                        <a class="dropdown-item dcolor tolivecomment" href="/livecomment">Live Comment</a>
+                        <a class="dropdown-item dcolor toliveurl" href="/tableurl">Live Url</a>
+                        <a class="dropdown-item dcolor toupgradeplan" href="/price">Upgrade Plan</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <button id="toDelete" type="button" data-toggle="modal" data-target="#deleteModalCenter" class="d-none"></button>
+
+    <!-- Modal For delete-->
+    <div class="modal fade" id="deleteModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body text-center" id="modelDelete">
+                    <h1 class="text-danger m-0"><i class="fas fa-trash-alt"></i></h1>
+                    <br>
+                </div>
+                <div class="modal-footer d-flex justify-content-between">
+                    <button type="button" onclick="tocancelmodel()" class="btn btn-light dcolor" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn d-bd text-white px-4" id="agree" data-dismiss="modal">Yes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <%- body %>
+    </div>
+
+    <div class="d-flex align-items-stretch justify-content-between text-white px-5 py-3" id="pageFooter" style="background-color: #2F86B9; font-size: 14px">
+        <div class="form-inline align-items-start">
+            <div class="inline-div form-inline align-items-start mr-4">
+                <p class="font-weight-bold">Contact</p>
+                <ul class="list-unstyled ml-4">
+                    <li>+85512345678</li>
+                    <li>example@gmail.com</li>
+                    <li style="max-width: 250px;">23 No, st 213 Village II Sensok Bongkork I Phnom Penh</li>
+                </ul>
+            </div>
+            <div class="inline-div form-inline align-items-start">
+                <p class="font-weight-bold">Information</p>
+                <ul class="list-unstyled ml-4">
+                    <li>About Us</li>
+                    <li><a href="/privacy" class="text-white">Privacy Policy</a></li>
+                    <li><a href="/term" class="text-white">Term & Condition</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="d-flex flex-column justify-content-between">
+            <ul class="text-right list-unstyled list-inline">
+                <li class="list-inline-item"><i class="fab fa-facebook-f"></i></li>
+                <li class="list-inline-item"><i class="fab fa-instagram"></i></li>
+                <li class="list-inline-item"><i class="fab fa-twitter"></i></li>
+            </ul>
+            <p>© Retrieve Facebook Live Comment</p>
+        </div>
+    </div>
+    <script>
+        if ((window.location.pathname != '/') && (window.location.pathname != '/term') && (window.location.pathname != '/privacy')) {
+            document.getElementById('pageFooter').setAttribute('style', 'display: none !important');
+        }
+    </script>
+    <script type="text/javascript" src="/assets/js/sort-table.js"></script>
+    <script>
+        const getCellValue = (tr, idx) => tr.children[idx].innerText || tr.children[idx].textContent;
+
+        const comparer = (idx, asc) => (a, b) => ((v1, v2) =>
+            v1 !== '' && v2 !== '' && !isNaN(v1) && !isNaN(v2) ? v1 - v2 : v1.toString().localeCompare(v2)
+        )(getCellValue(asc ? a : b, idx), getCellValue(asc ? b : a, idx));
+
+        // do the work...
+        document.querySelectorAll('th').forEach(th => th.addEventListener('click', (() => {
+            const table = th.closest('table');
+            Array.from(table.querySelectorAll('tr:nth-child(n+2)'))
+                .sort(comparer(Array.from(th.parentNode.children).indexOf(th), this.asc = !this.asc))
+                .forEach(tr => table.appendChild(tr));
+        })));
+    </script>
+</body>
+
+</html>
