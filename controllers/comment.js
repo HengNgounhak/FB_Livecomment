@@ -2,7 +2,6 @@ const Comment = require('../models/comment');
 const cheerio = require('cheerio');
 const Url = require('../models/url');
 const axios = require('axios');
-const json2xls = require('json2xls');
 const fs = require('fs');
 
 // exports.newComment = (req, res) => {
