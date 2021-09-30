@@ -17,7 +17,7 @@ async function getUser(id, username, email) {
                 console.log(e);
             })
         } else {
-            document.getElementById('btnLogin').click();
+            // document.getElementById('btnLogin').click();
             document.getElementById('modelMoreInformation').style.display = 'inline';
             document.getElementById('modelFBLogin').style.display = 'none';
             const form = document.getElementById('moreInformationForm');
