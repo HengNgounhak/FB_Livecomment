@@ -27,7 +27,7 @@ exports.loginUser = (req, res) => {
 exports.checkUser = (req, res) => {
     if (req.body.fbId) {
         User.find({ fbId: req.body.fbId }).then((value) => {
-            if (value.lenth > 0) {
+            if (value.length > 0) {
                 User.findOneAndUpdate({ fbId: req.body.fbId }, { useFindAndModify: false }).then(user => {
                     // console.log(user);
                     if (user) {
