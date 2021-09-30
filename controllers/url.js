@@ -14,7 +14,7 @@ exports.newUrl = async(req, res) => {
                     const $ = await cheerio.load(await response.data);
                     if ($) {
                         const urldata = $('script').first().next().html();
-                        const livedata = JSON.parse(urldata);
+                        const livedata = JSON.parse(JSON.stringify(urldata));
                         try {
                             const datetime = new Date(new Date(livedata.dateCreated).toLocaleString("en-US", { timeZone: "Asia/Jakarta" }).toString());
 
