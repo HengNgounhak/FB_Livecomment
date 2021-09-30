@@ -101,6 +101,7 @@ router.post('/ifsameuser', (req, res) => {
         if (req.session.user.fbId == req.body.fbId) {
             res.send(true)
         } else {
+            req.session.destroy();
             res.send(false)
         }
     }
