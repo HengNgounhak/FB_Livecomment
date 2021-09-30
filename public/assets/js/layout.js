@@ -63,7 +63,9 @@ function setElements(isLogin) {
         document.querySelector("#list > li").style.display = 'inline';
         document.getElementById("more").style.display = 'block';
         document.getElementById("usericon").style.display = 'block';
-        document.getElementById('exit').click();
+        if (document.getElementById('modelFBLogin').style.display == 'none') {
+            document.getElementById('exit').click();
+        }
     } else {
         document.getElementById("btnLogin").style.display = 'block';
         document.getElementById("list").style.display = 'none';

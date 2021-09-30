@@ -37,7 +37,7 @@ exports.checkUser = (req, res) => {
                 res.send(false)
             }
         }).catch(err => {
-            console.log(err);
+            res.send(false);
         })
     } else {
         res.redirect('/');
