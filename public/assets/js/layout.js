@@ -63,7 +63,7 @@ function setElements(isLogin) {
         document.querySelector("#list > li").style.display = 'inline';
         document.getElementById("more").style.display = 'block';
         document.getElementById("usericon").style.display = 'block';
-
+        document.getElementById('exit').click();
     } else {
         document.getElementById("btnLogin").style.display = 'block';
         document.getElementById("list").style.display = 'none';
@@ -114,18 +114,18 @@ async function testAPI() {
     })
 }
 
-// async function moreInformation() {
-//     document.getElementById('btnLogin').click();
-//     document.getElementById('modelMoreInformation').style.display = 'inline';
-//     document.getElementById('modelFBLogin').style.display = 'none';
-//     const form = document.getElementById('moreInformationForm');
-//     await form.addEventListener('submit', async e => {
-//         e.preventDefault();
-//         const telephone = e.target.usertelephone.value;
-//         const address = e.target.useraddress.value;
-//         await newUser(fbId, username, email, telephone, address)
-//     })
-// }
+async function moreInformation() {
+    document.getElementById('btnLogin').click();
+    document.getElementById('modelMoreInformation').style.display = 'inline';
+    document.getElementById('modelFBLogin').style.display = 'none';
+    const form = document.getElementById('moreInformationForm');
+    await form.addEventListener('submit', async e => {
+        e.preventDefault();
+        const telephone = e.target.usertelephone.value;
+        const address = e.target.useraddress.value;
+        await newUser(fbId, username, email, telephone, address)
+    })
+}
 
 async function userProfile() {
     await axios.get('/getuser').then((response) => {

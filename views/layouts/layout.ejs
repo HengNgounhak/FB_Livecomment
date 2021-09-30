@@ -38,7 +38,7 @@
                         <div class="modal-content" id="modelFBLogin">
                             <div class="modal-header border-0 pb-0 pt-2">
                                 <button type="button" class="close dcolor" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
+                                <span aria-hidden="true" id="exit">&times;</span>
                             </button>
                             </div>
                             <div class="modal-body text-center dcolor">
@@ -56,12 +56,12 @@
                                 <form id="moreInformationForm">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Telephone</label>
-                                        <input type="text" class="form-control inputForm" id="usertelephone" minlength="9" maxlength="10" aria-describedby="emailHelp" placeholder="Telephone">
+                                        <input type="text" class="form-control inputForm" id="usertelephone" minlength="9" maxlength="10" aria-describedby="emailHelp" placeholder="Telephone" required>
                                         <small id="emailHelp" class="form-text text-muted dcolor">We'll never share your telephone with anyone else.</small>
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleInputPassword1">Address</label>
-                                        <input type="text" class="form-control inputForm" id="useraddress" placeholder="Address">
+                                        <input type="text" class="form-control inputForm" id="useraddress" placeholder="Address" required>
                                     </div>
                                     <div class="text-center pt-3">
                                         <button type="submit" class="btn d-bd text-white w-50">Submit</button>
