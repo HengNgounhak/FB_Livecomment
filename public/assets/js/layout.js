@@ -123,6 +123,7 @@ async function moreInformation() {
         e.preventDefault();
         const telephone = e.target.usertelephone.value;
         const address = e.target.useraddress.value;
+        // console.log(fbId, username, email);
         await newUser(fbId, username, email, telephone, address)
     })
 }

@@ -44,7 +44,7 @@ exports.checkUser = (req, res) => {
     }
 }
 
-exports.newUser = (req, res) => {
+exports.newUser = async(req, res) => {
     if (req.body) {
         const user = new User({
             fbId: req.body.fbId,
@@ -56,7 +56,7 @@ exports.newUser = (req, res) => {
             status: "Enable"
         })
 
-        user.save().then(() => {
+        await user.save().then(() => {
             res.send(true)
         }).catch((err) => {
             console.log(err);
