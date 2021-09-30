@@ -126,7 +126,12 @@ async function moreInformation() {
         const telephone = e.target.usertelephone.value;
         const address = e.target.useraddress.value;
         // console.log(fbId, username, email);
-        await newUser(fbId, username, email, telephone, address)
+        if (telephone.length > 8 && telephone.length < 11) {
+            await newUser(fbId, username, email, telephone, address)
+        } else {
+            document.getElementById('wrongtelephone').innerText = "!!! Wrong telephone (require 9 or 10 digit)"
+        }
+
     })
 }
 
