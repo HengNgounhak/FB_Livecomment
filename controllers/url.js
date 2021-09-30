@@ -42,6 +42,8 @@ exports.newUrl = async(req, res) => {
                             res.send(false);
                         }
                     }
+                }).catch(() => {
+                    res.send(false);
                 })
             }
         })
