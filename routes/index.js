@@ -99,7 +99,6 @@ router.get('/tablepage', (req, res) => {
 router.post('/ifsameuser', (req, res) => {
     if (req.body.fbId) {
         if (req.session.user.fbId == req.body.fbId) {
-            req.session.destroy();
             res.send(true)
         } else {
             res.send(false)

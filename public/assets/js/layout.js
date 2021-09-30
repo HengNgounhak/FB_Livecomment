@@ -105,7 +105,7 @@ async function testAPI() {
             if ((window.location.pathname != '/') && (window.location.pathname != '/term') && (window.location.pathname != '/privacy')) {
                 await axios.post('/ifsameuser', { fbId: fbId }).then((value) => {
                     if (!value.data) {
-                        window.location.reload();
+                        logout();
                     }
                 })
             }
