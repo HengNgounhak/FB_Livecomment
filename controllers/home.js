@@ -39,7 +39,9 @@ exports.checkUser = (req, res) => {
                         res.send(false)
                     }
                 }).catch(err => {
-                    res.send(false);
+                    if (err) {
+                        res.send(false);
+                    }
                 })
             } else {
                 res.send(false)
