@@ -50,7 +50,7 @@ mongoose.connect(`mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PA
         app.listen(process.env.PORT || 3000);
         // const server = https.createServer({ key: key, cert: cert }, app);
         // server.listen(3000);
-        console.log("https port 3000")
+        // console.log("https port 3000")
     }).catch(err => {
         console.log(err);
     })

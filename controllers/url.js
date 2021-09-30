@@ -11,35 +11,37 @@ exports.newUrl = async(req, res) => {
                 res.send('exist');
             } else {
                 await axios.get(req.body.liveurl).then(async response => {
-                    const $ = cheerio.load(response.data);
-                    const urldata = $('script').first().next().text();
-                    const livedata = JSON.parse(urldata);
-                    try {
-                        const datetime = new Date(new Date(livedata.dateCreated).toLocaleString("en-US", { timeZone: "Asia/Jakarta" }).toString());
+                    const $ = await cheerio.load(await response.data);
+                    if ($) {
+                        const urldata = $('script').first().next().html();
+                        const livedata = JSON.parse(urldata);
+                        try {
+                            const datetime = new Date(new Date(livedata.dateCreated).toLocaleString("en-US", { timeZone: "Asia/Jakarta" }).toString());
 
-                        const date = (Number(datetime.getDate()) < 10 ? "0" + datetime.getDate() : datetime.getDate()) + "/" +
-                            ((Number(datetime.getMonth()) + 1) < 10 ? "0" + (Number(datetime.getMonth()) + 1) : (Number(datetime.getMonth()) + 1)) +
-                            "/" + datetime.getFullYear();
-                        const time = (datetime.getHours() < 10 ? ("0" + datetime.getHours()) : datetime.getHours()) + ":" + (
-                            datetime.getMinutes() < 10 ? ("0" + datetime.getMinutes()) : datetime.getMinutes());
-                        const url = new Url({
-                            pageId: req.session.pageId,
-                            liveurl: req.body.liveurl,
-                            date: date,
-                            time: time
-                        })
-
-                        await url.save().then((value) => {
-                            req.session.urlId = value._id
-                            res.send({
-                                commentCount: livedata.commentCount,
-                                authorId: livedata.author.identifier
+                            const date = (Number(datetime.getDate()) < 10 ? "0" + datetime.getDate() : datetime.getDate()) + "/" +
+                                ((Number(datetime.getMonth()) + 1) < 10 ? "0" + (Number(datetime.getMonth()) + 1) : (Number(datetime.getMonth()) + 1)) +
+                                "/" + datetime.getFullYear();
+                            const time = (datetime.getHours() < 10 ? ("0" + datetime.getHours()) : datetime.getHours()) + ":" + (
+                                datetime.getMinutes() < 10 ? ("0" + datetime.getMinutes()) : datetime.getMinutes());
+                            const url = new Url({
+                                pageId: req.session.pageId,
+                                liveurl: req.body.liveurl,
+                                date: date,
+                                time: time
                             })
-                        }).catch(() => {
-                            res.send(false)
-                        })
-                    } catch (error) {
-                        res.send(false);
+
+                            await url.save().then((value) => {
+                                req.session.urlId = value._id
+                                res.send({
+                                    commentCount: livedata.commentCount,
+                                    authorId: livedata.author.identifier
+                                })
+                            }).catch(() => {
+                                res.send(false)
+                            })
+                        } catch (error) {
+                            res.send(false);
+                        }
                     }
                 })
             }
