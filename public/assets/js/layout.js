@@ -132,11 +132,15 @@ async function moreInformation() {
 
 async function userProfile() {
     await axios.get('/getuser').then((response) => {
-        if (response.data.email) {
-            document.getElementById('email').innerText = response.data.email;
+        if (response.data) {
+            if (response.data.email) {
+                document.getElementById('email').innerText = response.data.email;
+            }
+            document.getElementById('username').innerText = response.data.username;
+            document.getElementById('mytelephone').innerText = response.data.telephone;
+            document.getElementById('myaddress').innerText = response.data.address;
+        } else {
+            logout();
         }
-        document.getElementById('username').innerText = response.data.username;
-        document.getElementById('mytelephone').innerText = response.data.telephone;
-        document.getElementById('myaddress').innerText = response.data.address;
     })
 }
