@@ -31,7 +31,11 @@ router.get('/gettablecomment', comment.getComment);
 router.post('/deletecomment', comment.deleteComment);
 
 router.get('/price', (req, res) => {
-    res.render('price');
+    if (req.session.user) {
+        res.render('price');
+    } else {
+        res.redirect('/')
+    }
 });
 
 router.get('/page', (req, res) => {
@@ -92,8 +96,15 @@ router.get('/tablepage', (req, res) => {
     }
 });
 
-router.get('/getSession', (req, res) => {
-    res.send(req.session.user)
+router.post('/ifsameuser', (req, res) => {
+    if (req.body.fbId) {
+        if (req.session.user.fbId == req.body.fbId) {
+            req.session.destroy();
+            res.send(true)
+        } else {
+            res.send(false)
+        }
+    }
 })
 
 router.get('/logout', (req, res) => {

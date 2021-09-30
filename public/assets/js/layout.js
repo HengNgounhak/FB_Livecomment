@@ -101,6 +101,12 @@ async function testAPI() {
                     console.log(error);
                 }
             }
+
+            await axios.post('/ifsameuser', { fbId: fbId }).then((value) => {
+                if (!value.data) {
+                    window.location.reload();
+                }
+            })
         }
     })
 }
