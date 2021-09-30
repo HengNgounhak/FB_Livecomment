@@ -26,19 +26,26 @@ exports.loginUser = (req, res) => {
 
 exports.checkUser = (req, res) => {
     if (req.body.fbId) {
-        User.findOneAndUpdate({ fbId: req.body.fbId }, { useFindAndModify: false }).then(user => {
-            // console.log(user);
-            if (user.length > 0) {
-                user.username = req.body.username;
-                user.email = req.body.email;
-                res.send(true)
-                return user.save();
+        User.find({ fbId: req.body.fbId }).then((value) => {
+            if (value.lenth > 0) {
+                User.findOneAndUpdate({ fbId: req.body.fbId }, { useFindAndModify: false }).then(user => {
+                    // console.log(user);
+                    if (user) {
+                        user.username = req.body.username;
+                        user.email = req.body.email;
+                        res.send(true)
+                        return user.save();
+                    } else {
+                        res.send(false)
+                    }
+                }).catch(err => {
+                    res.send(false);
+                })
             } else {
                 res.send(false)
             }
-        }).catch(err => {
-            res.send(false);
         })
+
     } else {
         res.redirect('/');
     }
