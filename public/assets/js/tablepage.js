@@ -13,10 +13,13 @@ function cancelAddNewPage() {
 }
 
 async function submitNewPage() {
+    const url = new URL(window.location.href);
+    const fbId = url.searchParams.get("fbId");
     const pageName = document.getElementById('newPageName').value;
     const pageStatus = document.getElementById('newPageStatus').value;
     if (pageName) {
         await axios.post('/newpage', {
+            fbId: fbId,
             name: pageName,
             status: pageStatus
         }).then(() => {
@@ -59,8 +62,8 @@ async function tourl(id) {
 }
 
 async function getUserPage() {
-    var url = new URL(window.location.href);
-    var fbId = url.searchParams.get("fbId");
+    const url = new URL(window.location.href);
+    const fbId = url.searchParams.get("fbId");
     if (fbId) {
         await axios.post('/getuserpage', { fbId: fbId }).then((value) => {
             const parent = document.getElementById('tablePage');

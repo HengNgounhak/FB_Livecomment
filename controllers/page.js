@@ -1,13 +1,13 @@
 const Page = require('../models/page');
 
-exports.newPage = (req, res) => {
+exports.newPage = async(req, res) => {
     const page = new Page({
-        fbId: req.session.user.fbId,
+        fbId: req.body.fbId,
         name: req.body.name,
         status: req.body.status
     })
 
-    page.save().then(() => {
+    await page.save().then(() => {
         res.send(true)
     }).catch(() => {
         res.send(false)
