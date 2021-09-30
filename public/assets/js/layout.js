@@ -119,11 +119,11 @@ async function moreInformation() {
     document.getElementById('modelMoreInformation').style.display = 'inline';
     document.getElementById('modelFBLogin').style.display = 'none';
     const form = document.getElementById('moreInformationForm');
-    await form.addEventListener('submit', e => {
+    await form.addEventListener('submit', async e => {
         e.preventDefault();
         const telephone = e.target.usertelephone.value;
         const address = e.target.useraddress.value;
-        newUser(fbId, username, email, telephone, address)
+        await newUser(fbId, username, email, telephone, address)
     })
 }
 
