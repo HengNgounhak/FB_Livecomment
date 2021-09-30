@@ -56,7 +56,7 @@
                                 <form id="moreInformationForm">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Telephone</label>
-                                        <input type="text" class="form-control inputForm" id="usertelephone" minlength="9" maxlength="10" aria-describedby="emailHelp" placeholder="Telephone" required>
+                                        <input type="number" class="form-control inputForm" id="usertelephone" pattern=".{9,10}" aria-describedby="emailHelp" placeholder="Telephone" required title="9 or 10 numbers">
                                         <small id="emailHelp" class="form-text text-muted dcolor">We'll never share your telephone with anyone else.</small>
                                     </div>
                                     <div class="form-group">
