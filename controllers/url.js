@@ -12,7 +12,8 @@ exports.newUrl = async(req, res) => {
             } else {
                 await axios.get(req.body.liveurl).then(async response => {
                     const $ = cheerio.load(response.data);
-                    const livedata = JSON.parse($('script').first().next().text());
+                    const urldata = $('script').first().next().text();
+                    const livedata = JSON.parse(urldata);
                     try {
                         const datetime = new Date(new Date(livedata.dateCreated).toLocaleString("en-US", { timeZone: "Asia/Jakarta" }).toString());
 
