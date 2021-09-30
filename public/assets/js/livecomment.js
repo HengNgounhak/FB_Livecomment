@@ -40,12 +40,10 @@ async function getcomment(liveurl, keyword) {
             if (resolve == 'exist') {
                 document.location.href = "/comment";
             } else if (resolve) {
-                const videoLiveId = liveurl.split('/');
                 await axios.post('/getcomment', {
-                    videoLiveId: videoLiveId[videoLiveId.length - 1],
                     keyword: keyword,
                     commentCount: resolve.commentCount,
-                    authorId: resolve.authorId
+                    mobileurl: resolve.mobileurl.replace('https://www', 'https://mobile')
                 }).then((value) => {
                     if (value.data) {
                         document.location.href = "/comment";

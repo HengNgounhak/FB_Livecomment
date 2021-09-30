@@ -42,7 +42,7 @@ exports.deleteComment = (req, res) => {
 exports.getAllComment = async(req, res) => {
     if (req.body) {
         for (var i = 0; i <= req.body.commentCount; i += 10) {
-            await axios.get(`https://mobile.facebook.com/story.php?story_fbid=${req.body.videoLiveId}&id=${req.body.authorId}&p=${i}&refid=52`).then(async response => {
+            await axios.get(`${req.body.mobileurl}&p=${i}&refid=52`).then(async response => {
 
                 const $ = await cheerio.load(response.data);
                 // console.log($('#m_story_permalink_view').length);

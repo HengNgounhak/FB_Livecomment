@@ -29,7 +29,12 @@ async function getUrl(usertype) {
             })
         } else {
             const child = document.createElement('tr');
-            child.innerHTML = '<td>Empty</td><td>Empty</td><td>Empty</td><td>Empty</td>';
+            if (usertype == "Admin") {
+                child.innerHTML = '<td>Empty</td><td>Empty</td><td>Empty</td><td>Empty</td>';
+            } else {
+                child.innerHTML = '<td>Empty</td><td>Empty</td><td>Empty</td>';
+            }
+
             parent.appendChild(child);
         }
     })

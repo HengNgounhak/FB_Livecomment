@@ -12,9 +12,9 @@ exports.newUrl = async(req, res) => {
             } else {
                 await axios.get(req.body.liveurl).then(async response => {
                     const $ = await cheerio.load(await response.data);
-                    if ($) {
-                        const urldata = $('script').first().next().html();
-                        const livedata = JSON.parse(JSON.stringify(urldata));
+                    const urldata = await $('script').first().next().html();
+                    if (urldata) {
+                        const livedata = JSON.parse(urldata);
                         try {
                             const datetime = new Date(new Date(livedata.dateCreated).toLocaleString("en-US", { timeZone: "Asia/Jakarta" }).toString());
 
@@ -34,7 +34,7 @@ exports.newUrl = async(req, res) => {
                                 req.session.urlId = value._id
                                 res.send({
                                     commentCount: livedata.commentCount,
-                                    authorId: livedata.author.identifier
+                                    mobileurl: livedata.url
                                 })
                             }).catch(() => {
                                 res.send(false)
