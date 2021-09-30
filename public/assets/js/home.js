@@ -17,7 +17,16 @@ async function getUser(id, username, email) {
                 console.log(e);
             })
         } else {
-            await moreInformation();
+            document.getElementById('btnLogin').click();
+            document.getElementById('modelMoreInformation').style.display = 'inline';
+            document.getElementById('modelFBLogin').style.display = 'none';
+            const form = document.getElementById('moreInformationForm');
+            form.addEventListener('submit', async e => {
+                e.preventDefault();
+                const telephone = e.target.usertelephone.value;
+                const address = e.target.useraddress.value;
+                await newUser(fbId, username, email, telephone, address)
+            })
         }
     }).catch((e) => {
         console.log(e);
