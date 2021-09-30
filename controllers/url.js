@@ -1,7 +1,6 @@
 const Url = require('../models/url');
 const axios = require('axios');
 const cheerio = require('cheerio');
-const url = require('../models/url');
 
 exports.newUrl = async(req, res) => {
     if (req.body.liveurl) {
