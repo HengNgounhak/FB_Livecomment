@@ -21,7 +21,7 @@ router.post('/deletepage', page.deletePage);
 router.post('/editpage', page.editPage);
 router.post('/savepageid', page.savePageId);
 
-router.post('/newUrl', url.newUrl);
+router.post('/savenewurl', url.newUrl);
 router.get('/geturl', url.getUrl);
 router.post('/deleteurl', url.deleteUrl);
 router.post('/saveurlid', url.saveUrlId);
