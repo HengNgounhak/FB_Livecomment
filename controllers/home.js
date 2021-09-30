@@ -28,7 +28,7 @@ exports.checkUser = (req, res) => {
     if (req.body.fbId) {
         User.findOneAndUpdate({ fbId: req.body.fbId }, { useFindAndModify: false }).then(user => {
             // console.log(user);
-            if (user) {
+            if (user.length > 0) {
                 user.username = req.body.username;
                 user.email = req.body.email;
                 res.send(true)
