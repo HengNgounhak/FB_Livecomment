@@ -11,8 +11,8 @@ exports.newUrl = async(req, res) => {
                 res.send('exist');
             } else {
                 await axios.get(req.body.liveurl).then(async response => {
-                    const $ = await cheerio.load(await response.data);
-                    const urldata = await $('script').first().next().html();
+                    const ch = await cheerio.load(await response.data);
+                    const urldata = await ch('script').first().next().html();
                     if (urldata) {
                         const livedata = JSON.parse(urldata);
                         try {
@@ -30,7 +30,7 @@ exports.newUrl = async(req, res) => {
                                 time: time
                             })
 
-                            await url.save().then((value) => {
+                            url.save().then((value) => {
                                 req.session.urlId = value._id
                                 res.send({
                                     commentCount: livedata.commentCount,
