@@ -23,7 +23,7 @@ async function submitNewPage() {
             name: pageName,
             status: pageStatus
         }).then(() => {
-            document.location.href = "/tablepage";
+            document.location.reload();
         })
     }
 }
