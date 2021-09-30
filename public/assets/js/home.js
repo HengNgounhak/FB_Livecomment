@@ -17,7 +17,7 @@ async function getUser(id, username, email) {
                 console.log(e);
             })
         } else {
-            moreInformation();
+            await moreInformation();
         }
     }).catch((e) => {
         console.log(e);
