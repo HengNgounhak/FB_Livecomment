@@ -30,15 +30,15 @@ exports.newUrl = async(req, res) => {
                                 time: time
                             })
 
-                            url.save().then((value) => {
-                                req.session.urlId = value._id
-                                res.send({
+                            // url.save().then((value) => {
+                            req.session.urlId = value._id
+                            res.send({
                                     commentCount: livedata.commentCount,
                                     mobileurl: livedata.url
                                 })
-                            }).catch(() => {
-                                res.send(false)
-                            })
+                                // }).catch(() => {
+                                //     res.send(false)
+                                // })
                         } catch (error) {
                             res.send(false);
                         }
