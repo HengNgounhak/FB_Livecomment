@@ -69,14 +69,15 @@ const cheerio = require('cheerio');
 
 exports.savenewurl = async(req, res) => {
     if (req.body.liveurl) {
-        await axios.get(`${req.body.liveurl.replace('https://www', 'https://mobile')}`).then(async(value) => {
-            const cheer = await cheerio.load(await value.data);
-            const urldata = await cheer('script').first().next().html();
+        res.send(req.body.liveurl.replace('https://www', 'https://mobile'));
+        // await axios.get(`${req.body.liveurl.replace('https://www', 'https://mobile')}`).then(async(value) => {
+        //     const cheer = await cheerio.load(await value.data);
+        //     const urldata = await cheer('script').first().next().html();
 
-            //     if (urldata) {
-            // const livedata = JSON.parse(urldata);
-            res.send(urldata);
-        })
+        //     //     if (urldata) {
+        //     // const livedata = JSON.parse(urldata);
+        //     res.send(urldata);
+        // })
     }
 }
 
