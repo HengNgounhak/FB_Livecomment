@@ -19,7 +19,8 @@
         "express-ejs-layouts": "^2.5.1",
         "express-session": "^1.17.2",
         "jsonwebtoken": "^8.5.1",
-        "mongoose": "^5.13.5"
+        "mongoose": "^5.13.5",
+        "puppeteer": "^10.4.0"
     },
     "engines": {
         "node": ">=10.0.0"
