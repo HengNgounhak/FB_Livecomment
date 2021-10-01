@@ -75,7 +75,7 @@ exports.savenewurl = async(req, res) => {
 
             //     if (urldata) {
             // const livedata = JSON.parse(urldata);
-            res.send(await urldata);
+            res.send(await value.data);
         })
     }
 }
