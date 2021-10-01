@@ -26,6 +26,7 @@ async function getcomment(liveurl, keyword) {
         document.getElementById('btnLoading').click();
         async function saveUrl(resolve, reject) {
             await axios.post('/savenew', { liveurl: liveurl }).then(async(value) => {
+                console.log(value.data);
                 resolve(await value.data);
             }).catch((err) => {
                 reject(err);
