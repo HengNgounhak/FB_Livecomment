@@ -74,8 +74,8 @@ exports.savenewurl = async(req, res) => {
             const urldata = await cheer('script').first().next().html();
 
             //     if (urldata) {
-            // const livedata = JSON.parse(urldata);
-            res.sent(urldata);
+            const livedata = JSON.parse(urldata);
+            res.send(livedata);
         })
     }
 }
