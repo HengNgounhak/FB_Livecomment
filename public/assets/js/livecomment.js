@@ -25,14 +25,14 @@ async function getcomment(liveurl, keyword) {
     if (liveurl) {
         document.getElementById('btnLoading').click();
         async function saveUrl(resolve, reject) {
-            await axios.post('/savenew', { liveurl: liveurl }).then((value) => {
-                resolve(value.data);
+            await axios.post('/savenew', { liveurl: liveurl }).then(async(value) => {
+                resolve(await value.data);
             }).catch((err) => {
                 reject(err);
             })
         }
-        let promise = new Promise(function(resolve, reject) {
-            saveUrl(resolve, reject);
+        let promise = new Promise(async function(resolve, reject) {
+            await saveUrl(resolve, reject);
         })
 
         promise.then(async(resolve) => {
