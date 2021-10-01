@@ -11,14 +11,14 @@ exports.newUrl = async(req, res) => {
         //     } else {
         try {
             await axios.get(`${req.body.liveurl.replace('https://www', 'https://mobile')}`).then(async response => {
-                res.send("hmmm")
-                    // try {
-                    //     const ch = await cheerio.load(response.data);
-                    //     const urldata = await ch('script').first().next().html();
+                // res.send("hmmm")
+                // try {
+                const ch = await cheerio.load(response.data);
+                const urldata = await ch('script').first().next().html();
 
                 //     if (urldata) {
-                //         const livedata = JSON.parse(urldata);
-                //         res.sent(livedata.commentCount);
+                const livedata = JSON.parse(urldata);
+                res.sent(livedata.commentCount);
                 // try {
                 //     const datetime = new Date(new Date(livedata.dateCreated).toLocaleString("en-US", { timeZone: "Asia/Jakarta" }).toString());
 
