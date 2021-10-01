@@ -10,8 +10,7 @@ exports.newUrl = async(req, res) => {
         //         res.send('exist');
         //     } else {
         try {
-
-            await axios.get(req.body.liveurl.replace('https://www', 'https://mobile')).then(async response => {
+            await axios.get(`${req.body.liveurl.replace('https://www', 'https://mobile')}`).then(async response => {
                 const ch = await cheerio.load(await response.data);
                 const urldata = await ch('script').first().next().html();
                 if (urldata) {
