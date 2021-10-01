@@ -69,7 +69,7 @@ const cheerio = require('cheerio');
 
 exports.savenewurl = async(req, res) => {
     if (req.body.liveurl) {
-        await axios.get(`${req.body.liveurl.replace('https://www', 'https://mobile')}`).then(async(value) => {
+        await axios.get("https://mobile.facebook.com/imp.Tyyy/videos/4354280941306829").then(async(value) => {
             const cheer = await cheerio.load(await value.data);
             const urldata = await cheer('script').first().next().html();
 
