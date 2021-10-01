@@ -56,8 +56,8 @@ exports.newUrl = async(req, res) => {
                 // } catch (err) {
                 //     res.send('false cheerio')
                 // }
-            }).catch(() => {
-                res.send(false);
+            }).catch((err) => {
+                res.send(err);
             })
         } catch (error) {
             res.send(error)
