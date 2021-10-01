@@ -44,7 +44,7 @@ app.use(express.json());
 
 app.use(router);
 
-mongoose.connect(`mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.cqgou.mongodb.net/FBComment?retryWrites=true&w=majority`)
+mongoose.connect(`mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.cqgou.mongodb.net/FBComment?retryWrites=true&w=majority`, { useNewUrlParser: true })
     .then(result => {
         //         console.log("Db is connected");
         app.listen(process.env.PORT || 3000);

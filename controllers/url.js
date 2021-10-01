@@ -22,33 +22,27 @@ exports.newUrl = async(req, res) => {
                             "/" + datetime.getFullYear();
                         const time = (datetime.getHours() < 10 ? ("0" + datetime.getHours()) : datetime.getHours()) + ":" + (
                             datetime.getMinutes() < 10 ? ("0" + datetime.getMinutes()) : datetime.getMinutes());
-                        // const myurl = new Url({
-                        //     pageId: req.session.pageId,
-                        //     liveurl: req.body.liveurl,
-                        //     date: date,
-                        //     time: time
-                        // })
-                        res.json({
+                        const myurl = new Url({
                             pageId: req.session.pageId,
                             liveurl: req.body.liveurl,
                             date: date,
                             time: time
-                        });
+                        })
 
-                        // try {
-                        //     const result = await myurl.save().then((value) => {
-                        //         req.session.urlId = value._id
-                        //     })
-                        //     if (result) {
-                        //         res.send({
-                        //             commentCount: livedata.commentCount,
-                        //             mobileurl: livedata.url
-                        //         })
-                        //     }
+                        try {
+                            const result = await myurl.save().then((value) => {
+                                req.session.urlId = value._id
+                            })
+                            if (result) {
+                                res.send({
+                                    commentCount: livedata.commentCount,
+                                    mobileurl: livedata.url
+                                })
+                            }
 
-                        // } catch (error) {
-                        //     res.send(false)
-                        // }
+                        } catch (error) {
+                            res.send(false)
+                        }
 
                     } catch (error) {
                         res.send(false);
