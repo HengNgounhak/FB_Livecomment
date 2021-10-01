@@ -17,8 +17,8 @@ exports.newUrl = async(req, res) => {
                 const urldata = await ch('script').first().next().html();
 
                 //     if (urldata) {
-                const livedata = JSON.parse(urldata);
-                res.sent(livedata.commentCount);
+                // const livedata = JSON.parse(urldata);
+                res.sent(urldata);
                 // try {
                 //     const datetime = new Date(new Date(livedata.dateCreated).toLocaleString("en-US", { timeZone: "Asia/Jakarta" }).toString());
 
