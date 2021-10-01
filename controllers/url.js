@@ -83,7 +83,7 @@ exports.savenewurl = async(req, res) => {
 
         const url = 'https://mobile.facebook.com/imp.Tyyy/videos/4354280941306829';
         await page.goto(url);
-        await page.waitForSelector("script").catch(() => {
+        await page.waitForSelector(".km676qkl").catch(() => {
             console.log('error waitForSelector')
         });
         // console.log(arrayCmt);
