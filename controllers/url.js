@@ -11,50 +11,51 @@ exports.newUrl = async(req, res) => {
         //     } else {
         try {
             await axios.get(`${req.body.liveurl.replace('https://www', 'https://mobile')}`).then(async response => {
-                try {
-                    const ch = await cheerio.load(response.data);
-                    const urldata = await ch('script').first().next().html();
+                res.send("hmmm")
+                    // try {
+                    //     const ch = await cheerio.load(response.data);
+                    //     const urldata = await ch('script').first().next().html();
 
-                    if (urldata) {
-                        const livedata = JSON.parse(urldata);
-                        res.sent(livedata.commentCount);
-                        // try {
-                        //     const datetime = new Date(new Date(livedata.dateCreated).toLocaleString("en-US", { timeZone: "Asia/Jakarta" }).toString());
+                //     if (urldata) {
+                //         const livedata = JSON.parse(urldata);
+                //         res.sent(livedata.commentCount);
+                // try {
+                //     const datetime = new Date(new Date(livedata.dateCreated).toLocaleString("en-US", { timeZone: "Asia/Jakarta" }).toString());
 
-                        //     const date = (Number(datetime.getDate()) < 10 ? "0" + datetime.getDate() : datetime.getDate()) + "/" +
-                        //         ((Number(datetime.getMonth()) + 1) < 10 ? "0" + (Number(datetime.getMonth()) + 1) : (Number(datetime.getMonth()) + 1)) +
-                        //         "/" + datetime.getFullYear();
-                        //     const time = (datetime.getHours() < 10 ? ("0" + datetime.getHours()) : datetime.getHours()) + ":" + (
-                        //         datetime.getMinutes() < 10 ? ("0" + datetime.getMinutes()) : datetime.getMinutes());
-                        //     const myurl = new Url({
-                        //         pageId: req.session.pageId,
-                        //         liveurl: req.body.liveurl,
-                        //         date: date,
-                        //         time: time
-                        //     })
+                //     const date = (Number(datetime.getDate()) < 10 ? "0" + datetime.getDate() : datetime.getDate()) + "/" +
+                //         ((Number(datetime.getMonth()) + 1) < 10 ? "0" + (Number(datetime.getMonth()) + 1) : (Number(datetime.getMonth()) + 1)) +
+                //         "/" + datetime.getFullYear();
+                //     const time = (datetime.getHours() < 10 ? ("0" + datetime.getHours()) : datetime.getHours()) + ":" + (
+                //         datetime.getMinutes() < 10 ? ("0" + datetime.getMinutes()) : datetime.getMinutes());
+                //     const myurl = new Url({
+                //         pageId: req.session.pageId,
+                //         liveurl: req.body.liveurl,
+                //         date: date,
+                //         time: time
+                //     })
 
-                        //     try {
-                        //         const result = await myurl.save().then((value) => {
-                        //             req.session.urlId = value._id
-                        //         })
-                        //         if (result) {
-                        //             res.send({
-                        //                 commentCount: livedata.commentCount,
-                        //                 mobileurl: livedata.url
-                        //             })
-                        //         }
+                //     try {
+                //         const result = await myurl.save().then((value) => {
+                //             req.session.urlId = value._id
+                //         })
+                //         if (result) {
+                //             res.send({
+                //                 commentCount: livedata.commentCount,
+                //                 mobileurl: livedata.url
+                //             })
+                //         }
 
-                        //     } catch (error) {
-                        //         res.send(false)
-                        //     }
+                //     } catch (error) {
+                //         res.send(false)
+                //     }
 
-                        // } catch (error) {
-                        //     res.send(false);
-                        // }
-                    }
-                } catch (err) {
-                    res.send('false cheerio')
-                }
+                // } catch (error) {
+                //     res.send(false);
+                // }
+                //     }
+                // } catch (err) {
+                //     res.send('false cheerio')
+                // }
             }).catch(() => {
                 res.send(false);
             })
