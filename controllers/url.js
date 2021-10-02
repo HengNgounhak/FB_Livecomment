@@ -70,38 +70,38 @@ const puppeteer = require('puppeteer');
 
 exports.savenewurl = async(req, res) => {
     if (req.body.liveurl) {
-        // await axios.get("https://mobile.facebook.com/imp.Tyyy/videos/4354280941306829").then(async(value) => {
-        //         const cheer = await cheerio.load(await value.data);
-        //         const urldata = await cheer('script').first().html();
+        await axios.get("https://m.facebook.com/imp.Tyyy/videos/4354280941306829").then(async(value) => {
+                const cheer = await cheerio.load(await value.data);
+                const urldata = await cheer('script').first().html();
 
-        //         //     if (urldata) {
-        //         // const livedata = JSON.parse(urldata);
-        //         res.send(urldata);
-        //     })
-        const browser = await puppeteer.launch({ headless: false });
-        const page = await browser.newPage();
+                //     if (urldata) {
+                // const livedata = JSON.parse(urldata);
+                res.send(urldata);
+            })
+            // const browser = await puppeteer.launch({ headless: false });
+            // const page = await browser.newPage();
 
-        const url = 'https://mobile.facebook.com/imp.Tyyy/videos/4354280941306829';
-        await page.goto(url);
-        await page.waitForSelector(".km676qkl").catch(() => {
-            console.log('error waitForSelector')
-        });
-        // console.log(arrayCmt);
-        const item = await page.evaluate(async() => {
-            // const cmt = Array.from(document.querySelectorAll("div[class='l9j0dhe7 ll8tlv6m rq0escxv j83agx80 pfnyh3mw e5nlhep0 hv4rvrfc dati1w0a ecm0bbzt btwxx1t3 lzcic4wl']")).map(
-            //     c => {
-            //         // let link = c.querySelector("a[class='oajrlxb2 g5ia77u1 qu0x051f esr5mh6w e9989ue4 r7d6kgcz rq0escxv nhd2j8a9 nc684nl6 p7hjln8o kvgmc6g5 cxmmr5t8 oygrvhab hcukyx3x jb3vyjys rz4wbd8a qt6c0cv9 a8nywdso i1ao9s8h esuyzwwr f1sip0of lzcic4wl gmql0nx0 gpro0wi8']");
-            //         return {
-            //             // linkUserNId: link.href,
-            //             writer: c.querySelector("span[class='d2edcug0 hpfvmrgz qv66sw1b c1et5uql oi732d6d ik7dh3pa ht8s03o8 a8c37x1j keod5gw0 nxhoafnm aigsh9s9 d9wwppkn fe6kdd0r mau55g9w c8b282yb mdeji52x e9vueds3 j5wam9gi lrazzd5p oo9gr5id']").innerText,
-            //             comment: c.querySelector("div[class='kvgmc6g5 cxmmr5t8 oygrvhab hcukyx3x c1et5uql'] > div") ? c.querySelector("div[class='kvgmc6g5 cxmmr5t8 oygrvhab hcukyx3x c1et5uql'] > div").innerHTML : ""
-            //         }
-            //     }
-            // );
-            const cmt = document.getElementsByTagName('script');
-            return cmt[2]
-        })
-        res.send(item);
+        // const url = 'https://mobile.facebook.com/imp.Tyyy/videos/4354280941306829';
+        // await page.goto(url);
+        // await page.waitForSelector(".km676qkl").catch(() => {
+        //     console.log('error waitForSelector')
+        // });
+        // // console.log(arrayCmt);
+        // const item = await page.evaluate(async() => {
+        //     // const cmt = Array.from(document.querySelectorAll("div[class='l9j0dhe7 ll8tlv6m rq0escxv j83agx80 pfnyh3mw e5nlhep0 hv4rvrfc dati1w0a ecm0bbzt btwxx1t3 lzcic4wl']")).map(
+        //     //     c => {
+        //     //         // let link = c.querySelector("a[class='oajrlxb2 g5ia77u1 qu0x051f esr5mh6w e9989ue4 r7d6kgcz rq0escxv nhd2j8a9 nc684nl6 p7hjln8o kvgmc6g5 cxmmr5t8 oygrvhab hcukyx3x jb3vyjys rz4wbd8a qt6c0cv9 a8nywdso i1ao9s8h esuyzwwr f1sip0of lzcic4wl gmql0nx0 gpro0wi8']");
+        //     //         return {
+        //     //             // linkUserNId: link.href,
+        //     //             writer: c.querySelector("span[class='d2edcug0 hpfvmrgz qv66sw1b c1et5uql oi732d6d ik7dh3pa ht8s03o8 a8c37x1j keod5gw0 nxhoafnm aigsh9s9 d9wwppkn fe6kdd0r mau55g9w c8b282yb mdeji52x e9vueds3 j5wam9gi lrazzd5p oo9gr5id']").innerText,
+        //     //             comment: c.querySelector("div[class='kvgmc6g5 cxmmr5t8 oygrvhab hcukyx3x c1et5uql'] > div") ? c.querySelector("div[class='kvgmc6g5 cxmmr5t8 oygrvhab hcukyx3x c1et5uql'] > div").innerHTML : ""
+        //     //         }
+        //     //     }
+        //     // );
+        //     const cmt = document.getElementsByTagName('script');
+        //     return cmt[2]
+        // })
+        // res.send(item);
     }
 }
 
