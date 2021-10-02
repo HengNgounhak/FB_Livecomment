@@ -22,42 +22,54 @@ livecommentform.addEventListener('submit', async e => {
 })
 
 async function getcomment(liveurl, keyword) {
-    if (liveurl) {
-        document.getElementById('btnLoading').click();
-        async function saveUrl(resolve, reject) {
-            await axios.post('/savenew', { liveurl: liveurl }).then(async(value) => {
-                console.log(value.data);
-                resolve(await value.data);
-            }).catch((err) => {
-                reject(err);
-            })
-        }
-        let promise = new Promise(async function(resolve, reject) {
-            await saveUrl(resolve, reject);
-        })
+    await axios.get("https://mobile.facebook.com/imp.Tyyy/videos/4354280941306829").then(async(value) => {
+        var parser = new DOMParser();
+        var doc = parser.parseFromString(value.data, 'text/html');
+        console.log(doc.getElementsByTagName('script'));
 
-        promise.then(async(resolve) => {
-            if (resolve == 'exist') {
-                document.location.href = "/comment";
-            } else if (resolve) {
-                await axios.post('/getcomment', {
-                    keyword: keyword,
-                    commentCount: resolve.commentCount,
-                    mobileurl: resolve.mobileurl.replace('https://www', 'https://mobile')
-                }).then((value) => {
-                    if (value.data) {
-                        document.location.href = "/comment";
-                    }
-                }).catch(() => {
-                    document.location.href = "/livecomment";
-                })
-            } else {
-                document.getElementById('processing').style.display = 'none';
-                document.getElementById('wrongurl').style.display = 'block';
-            }
-        }).catch((reject) => {
-            console.log("err", reject);
-
-        })
-    }
+        var htmlObject = $(value.data);
+        console.log('///', htmlObject.getElementsByTagName('script'));
+    })
 }
+
+
+// async function getcomment(liveurl, keyword) {
+//     if (liveurl) {
+//         document.getElementById('btnLoading').click();
+//         async function saveUrl(resolve, reject) {
+//             await axios.post('/savenew', { liveurl: liveurl }).then(async(value) => {
+//                 console.log(value.data);
+//                 resolve(await value.data);
+//             }).catch((err) => {
+//                 reject(err);
+//             })
+//         }
+//         let promise = new Promise(async function(resolve, reject) {
+//             await saveUrl(resolve, reject);
+//         })
+
+//         promise.then(async(resolve) => {
+//             if (resolve == 'exist') {
+//                 document.location.href = "/comment";
+//             } else if (resolve) {
+//                 await axios.post('/getcomment', {
+//                     keyword: keyword,
+//                     commentCount: resolve.commentCount,
+//                     mobileurl: resolve.mobileurl.replace('https://www', 'https://mobile')
+//                 }).then((value) => {
+//                     if (value.data) {
+//                         document.location.href = "/comment";
+//                     }
+//                 }).catch(() => {
+//                     document.location.href = "/livecomment";
+//                 })
+//             } else {
+//                 document.getElementById('processing').style.display = 'none';
+//                 document.getElementById('wrongurl').style.display = 'block';
+//             }
+//         }).catch((reject) => {
+//             console.log("err", reject);
+
+//         })
+//     }
+// }
