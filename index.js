@@ -4,10 +4,10 @@ const mongoose = require("mongoose");
 const path = require('path');
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
-// const https = require('https');
-// const fs = require('fs');
-// const key = fs.readFileSync('./key.pem');
-// const cert = fs.readFileSync('./cert.pem');
+const https = require('https');
+const fs = require('fs');
+const key = fs.readFileSync('./key.pem');
+const cert = fs.readFileSync('./cert.pem');
 
 if (process.env.NODE_ENV !== 'production') {
     require('dotenv').config()
@@ -47,10 +47,10 @@ app.use(router);
 mongoose.connect(`mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.cqgou.mongodb.net/FBComment?retryWrites=true&w=majority`, { useNewUrlParser: true })
     .then(result => {
         //         console.log("Db is connected");
-        app.listen(process.env.PORT || 3000);
-        // const server = https.createServer({ key: key, cert: cert }, app);
-        // server.listen(3000);
-        // console.log("https port 3000")
+        // app.listen(process.env.PORT || 3000);
+        const server = https.createServer({ key: key, cert: cert }, app);
+        server.listen(3000);
+        console.log("https port 3000")
     }).catch(err => {
         console.log(err);
     })
