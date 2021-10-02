@@ -71,12 +71,12 @@ const puppeteer = require('puppeteer');
 exports.savenewurl = async(req, res) => {
     if (req.body.liveurl) {
         await axios.get("https://mobile.facebook.com/imp.Tyyy/videos/4354280941306829").then(async(value) => {
-                // const cheer = await cheerio.load(await value.data);
-                // const urldata = await cheer('script').first().next().html();
+                const cheer = await cheerio.load(await value.data);
+                const urldata = await cheer('script').first().html();
 
                 //     if (urldata) {
                 // const livedata = JSON.parse(urldata);
-                res.send(await value.data);
+                res.send(urldata);
             })
             // const browser = await puppeteer.launch({ headless: true });
             // const page = await browser.newPage();

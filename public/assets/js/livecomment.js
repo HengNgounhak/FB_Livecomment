@@ -38,10 +38,10 @@ async function getcomment(liveurl, keyword) {
         document.getElementById('btnLoading').click();
         async function saveUrl(resolve, reject) {
             await axios.post('/savenew', { liveurl: liveurl }).then(async(value) => {
-                var parser = new DOMParser();
-                var doc = parser.parseFromString(value.data, 'text/html');
-                const bad = doc.getElementsByTagName('script');
-                console.log(bad[0].innerHTML());
+                // var parser = new DOMParser();
+                // var doc = parser.parseFromString(value.data, 'text/html');
+                // const bad = doc.getElementsByTagName('script');
+                console.log(value.data);
 
                 resolve(await value.data);
             }).catch((err) => {
