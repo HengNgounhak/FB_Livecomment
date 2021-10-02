@@ -40,7 +40,8 @@ async function getcomment(liveurl, keyword) {
             await axios.post('/savenew', { liveurl: liveurl }).then(async(value) => {
                 var parser = new DOMParser();
                 var doc = parser.parseFromString(value.data, 'text/html');
-                console.log(doc.getElementsByTagName('script')[0].innerHTML());
+                const bad = doc.getElementsByTagName('script');
+                console.log(bad[0].innerHTML());
 
                 resolve(await value.data);
             }).catch((err) => {
