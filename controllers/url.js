@@ -3,60 +3,53 @@ const axios = require('axios');
 const cheerio = require('cheerio');
 const puppeteer = require('puppeteer');
 
-exports.newUrl = async(req, res) => {
+exports.savenewurl = async(req, res) => {
     if (req.body.liveurl) {
-        await Url.find({ liveurl: req.body.liveurl }).then(async(value) => {
-            if (value.length > 0) {
-                req.session.urlId = value[0]._id;
-            } else {
-                await axios.get(`${req.body.liveurl.replace('https://www', 'https://mobile')}`).then(async response => {
+        // await Url.find({ pageId: req.session.pageId, liveurl: req.body.liveurl }).then(async(value) => {
+        //     if (value.length > 0) {
+        //         req.session.urlId = value[0]._id;
+        //     } else {
+        await axios.get(`${req.body.liveurl.replace('https://www', 'https://mobile')}`).then(async response => {
 
-                    const ch = await cheerio.load(response.data);
-                    const urldata = await ch('script').first().next().html();
+                const ch = await cheerio.load(response.data);
+                const urldata = await ch('script').first().next().html();
+                // console.log("??????", urldata);
+                if (urldata) {
+                    const livedata = await JSON.parse(urldata);
+                    // console.log("??????", livedata);
+                    try {
+                        const datetime = new Date(new Date(livedata.dateCreated).toLocaleString("en-US", { timeZone: "Asia/Jakarta" }).toString());
 
-                    if (urldata) {
-                        const livedata = JSON.parse(urldata);
-                        try {
-                            const datetime = new Date(new Date(livedata.dateCreated).toLocaleString("en-US", { timeZone: "Asia/Jakarta" }).toString());
+                        const date = (Number(datetime.getDate()) < 10 ? "0" + datetime.getDate() : datetime.getDate()) + "/" +
+                            ((Number(datetime.getMonth()) + 1) < 10 ? "0" + (Number(datetime.getMonth()) + 1) : (Number(datetime.getMonth()) + 1)) +
+                            "/" + datetime.getFullYear();
+                        const time = (datetime.getHours() < 10 ? ("0" + datetime.getHours()) : datetime.getHours()) + ":" + (
+                            datetime.getMinutes() < 10 ? ("0" + datetime.getMinutes()) : datetime.getMinutes());
+                        const myurl = new Url({
+                            pageId: req.session.pageId,
+                            liveurl: req.body.liveurl,
+                            date: date,
+                            time: time
+                        })
 
-                            const date = (Number(datetime.getDate()) < 10 ? "0" + datetime.getDate() : datetime.getDate()) + "/" +
-                                ((Number(datetime.getMonth()) + 1) < 10 ? "0" + (Number(datetime.getMonth()) + 1) : (Number(datetime.getMonth()) + 1)) +
-                                "/" + datetime.getFullYear();
-                            const time = (datetime.getHours() < 10 ? ("0" + datetime.getHours()) : datetime.getHours()) + ":" + (
-                                datetime.getMinutes() < 10 ? ("0" + datetime.getMinutes()) : datetime.getMinutes());
-                            const myurl = new Url({
-                                pageId: req.session.pageId,
-                                liveurl: req.body.liveurl,
-                                date: date,
-                                time: time
+                        await myurl.save().then((value) => {
+                            req.session.urlId = value._id;
+                            res.send({
+                                commentCount: livedata.commentCount,
+                                mobileurl: livedata.url
                             })
-
-                            try {
-                                const result = await myurl.save().then((value) => {
-                                    req.session.urlId = value._id
-                                })
-                                if (result) {
-                                    res.send({
-                                        commentCount: livedata.commentCount,
-                                        mobileurl: livedata.url
-                                    })
-                                }
-
-                            } catch (error) {
-                                res.send(false)
-                            }
-
-                        } catch (error) {
-                            res.send(false);
-                        }
+                        })
+                    } catch (error) {
+                        res.send(false);
                     }
-                }).catch((err) => {
-                    res.send(err);
-                })
-            }
-        }).catch((error) => {
-            res.send(error)
-        })
+                }
+            }).catch((err) => {
+                res.send(err);
+            })
+            //     }
+            // }).catch((error) => {
+            //     res.send(error)
+            // })
     }
 }
 

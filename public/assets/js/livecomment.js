@@ -41,7 +41,7 @@ async function getcomment(liveurl, keyword) {
                 // var parser = new DOMParser();
                 // var doc = parser.parseFromString(value.data, 'text/html');
                 // const bad = doc.getElementsByTagName('script');
-                console.log(value.data);
+                // console.log(value.data);
 
                 resolve(await value.data);
             }).catch((err) => {
